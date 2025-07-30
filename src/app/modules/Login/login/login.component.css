@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: 100vh;
+  background: url('/assets/pictures/background.jpg') no-repeat;
+  background-size: cover;
+}
+
+.glass-form {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  margin-top: 79px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 500px;
+  height: 50vh;
+}
+
+::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+.eye {
+  font-size: 1.5rem;
+  color: #333333;
+}
+
+@media (max-width: 992px) {
+  :host {
+    background-image: none;
+    background-color: white;
+  }
+
+  .eye {
+    color: black;
+  }
+}
+

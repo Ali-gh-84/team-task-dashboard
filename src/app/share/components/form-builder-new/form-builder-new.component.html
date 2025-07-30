@@ -1,0 +1,108 @@
+<form [formGroup]="form" (ngSubmit)="returnForm()">
+  <div class="row my-3">
+    <div class="col-12" *ngIf="alert">
+      <p class="text-bg-warning py-2 px-3 rounded-3 mx-auto" style="width: fit-content" [innerHTML]="alert"></p>
+    </div>
+    <div class="col-12 my-2" *ngFor="let section of items; let si = index" [classList]='section?.classList'>
+      <div class="text-end fw-bold pb-3 my-1 text-secondary"
+           *ngIf="section?.label && !section?.hidden">{{ section?.label }}
+      </div>
+      <mat-card class="my-input" *ngIf="!section?.hidden">
+        <mat-card-content dir="ltr">
+          <div class="row">
+            <div *ngFor="let item of getFields(section); let i = index" [classList]='item?.classList'
+                 [ngClass]="{'col-12': item?.type === 'hidden' && !item?.classList, 'col': item?.type !== 'hidden' && !item?.classList, 'ltr-input': item?.dirLtr}">
+              <div *ngIf="item.type === 'hidden'" class="mt-3">
+                <mat-label>{{ item?.label }}</mat-label>
+              </div>
+              <div *ngIf="item?.readOnly" class="read-only-box my-3">
+                <div class="label">{{ item?.label }}</div>
+                <div class="text-end f-3" *ngIf="item?.type == 'text'">
+                  {{ patchValue[item?.formControlName] }}
+                </div>
+              </div>
+              <div *ngIf="item?.type !== 'hidden' && !item?.readOnly">
+                <mat-form-field appearance="outline" class="w-100"
+                                *ngIf="!item?.isFile && item.type !== 'toggle' && item.type !== 'autoComplete' && item.type !== 'ckEditor' && item.type !== 'otp'">
+
+                  <mat-label>{{ item.label }}</mat-label>
+
+                  <!-- Input -->
+                  <input
+                    *ngIf="item.type !== 'select' && item.type !== 'textarea' && item.type !== 'date'"
+                    matInput
+                    [formControlName]="item.formControlName"
+                    [type]="item.type === 'password' ? (item.hidePassword ? 'password' : 'text') : item.type"
+                    autocomplete="off"
+                    [attr.name]="item.type === 'password' ? 'password' : null"
+                  />
+
+                  <!-- Show/Hide Password Icon -->
+                  <button
+                    *ngIf="item.type === 'password'"
+                    mat-icon-button
+                    matSuffix
+                    type="button"
+                    (click)="item.hidePassword = !item?.hidePassword"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="item?.hidePassword">
+                    <mat-icon>{{ item?.hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  </button>
+
+                  <!-- Select -->
+                  <mat-select *ngIf="item.type === 'select'" [formControlName]="item.formControlName"
+                              [multiple]="item.isMultiple">
+                    <mat-option *ngFor="let option of item.options" [value]="option.value">
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-select>
+
+                  <!-- Date -->
+                  <ng-container *ngIf="item.type === 'date'">
+                    <input matInput [matDatepicker]="picker" [formControlName]="item.formControlName">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </ng-container>
+
+                  <!-- Textarea -->
+                  <textarea
+                    *ngIf="item.type === 'textarea'"
+                    matInput
+                    [formControlName]="item.formControlName"
+                    rows="4"
+                    placeholder="{{ item.hint || '' }}"
+                    class="textarea-input">
+                          </textarea>
+
+                  <!-- Hint -->
+                  <mat-hint *ngIf="form.get(item.formControlName)?.touched && form.get(item.formControlName)?.invalid"
+                            class="fw-bold text-danger">{{ item?.hint }}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row" *ngIf="showSaveButton">
+    <div class="col">
+      <button mat-flat-button [color]="saveButtonColor" [ngStyle]="{'width': buttonWidth}"
+              [ngClass]="{'fixed-btn': fixedButton}"
+              [disabled]="form.invalid || !callerStatus?.closed || patchValidatePass(form)" class="mt-2 btn-disable">
+        <div *ngIf='!callerStatus?.closed' class="m-auto d-inline-block mx-2" [ngClass]="loadingLoader"></div>
+        <span *ngIf='!callerStatus?.closed && loadingName'>{{ loadingName }}</span>
+        <span *ngIf='callerStatus?.closed'>{{ saveButtonName }}</span>
+      </button>
+    </div>
+    <div class="col" *ngIf="showResetButton">
+      <button mat-flat-button color="warn" type="button" (click)="resetForm()"
+              [disabled]="!callerStatus?.closed" class="mt-2">
+        <span>پاک کردن فیلد ها</span>
+      </button>
+    </div>
+  </div>
+
+</form>

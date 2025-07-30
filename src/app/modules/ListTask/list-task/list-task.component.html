@@ -1,0 +1,107 @@
+<div class="container pb-4">
+  <div class="row m-0 mx-2">
+    <h2 class="text-center pt-4 pb-4 text">Tasks</h2>
+    <div class="d-flex align-items-center justify-content-center pt-1 pb-5 py-0">
+      <a mat-raised-button (click)="logout()">Log Out</a>
+    </div>
+
+    <div class="d-flex align-content-center justify-content-between p-1">
+      <div class="search-container d-flex align-items-center mb-5" [class.active]="showInput">
+        <button mat-icon-button (click)="toggleSearch()" aria-label="Search">
+          <mat-icon>search</mat-icon>
+        </button>
+        <input *ngIf="showInput" type="text" matInput placeholder="search ..." class="form-control" [(ngModel)]="searchText" />
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" style="min-width: 150px;" class="option">
+          <mat-label>filter status</mat-label>
+          <mat-select [(ngModel)]="statusFilter">
+            <mat-option value="all">all</mat-option>
+            <mat-option value="completed">completed</mat-option>
+            <mat-option value="incompleted">incompleted</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="filteredTasks"
+      (cdkDropListDropped)="drop($event)"
+      class="row"
+    >
+      <div
+        *ngFor="let i of filteredTasks; let j = index"
+        class="col-12 col-md-12 d-flex justify-content-center"
+        cdkDrag
+      >
+        <div class="card mt-4 all-card">
+          <div class="col-12">
+            <div class="question-title question-row icon-column d-flex align-items-center justify-content-between m-3"
+                 (click)="togglePanel(j)">
+              <span class="question-text pt-1 dark-question text-black fs-5">
+                {{ i.id }}) {{ i.title }}
+              </span>
+              <i [ngClass]="openPanelIndex === j ? 'fas fa-angle-up' : 'fas fa-angle-down'"></i>
+            </div>
+
+            <div class="cardAnimation" [ngClass]="{ 'open': openPanelIndex === j }">
+              <p class="p-3 text-black open-question-dark d-flex align-items-center justify-content-between" *ngIf="openPanelIndex === j">
+                <span class="text-primary">
+                  Description :
+                  <span class="text-black">{{ i.description }}</span>
+                </span>
+              </p>
+
+              <div class="d-flex flex-wrap justify-content-between align-items-center px-3 py-2 gap-3 info-row">
+                <div class="d-flex align-items-center gap-2">
+                  <mat-icon class="text-secondary">person</mat-icon>
+                  <p class="mb-0 text-muted">Assigned: <strong class="text-dark">{{ i.assigned }}</strong></p>
+                </div>
+
+                <div class="d-flex align-items-center gap-4">
+                  <button mat-icon-button
+                          [ngClass]="i.completed ? 'text-success' : 'text-danger'"
+                          (click)="putStatusTask(i)"
+                          aria-label="Toggle Status">
+                    <mat-icon>{{ i.completed ? 'check' : 'close' }}</mat-icon>
+                  </button>
+
+                  <a mat-icon-button aria-label="Edit" class="text-warning" [routerLink]="[i.id, 'edit']">
+                    <mat-icon>edit</mat-icon>
+                  </a>
+
+                  <a mat-icon-button aria-label="Delete" class="text-danger" (click)="deleteTask(i.id)">
+                    <mat-icon>delete</mat-icon>
+                  </a>
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                  <span
+                    [ngClass]="{
+                      'high-priority': i.priority === 'high',
+                      'medium-priority': i.priority === 'medium',
+                      'low-priority': i.priority === 'low'
+                    }"
+                    class="priority-indicator"
+                  >
+                    <mat-icon *ngIf="i.priority === 'high'">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="i.priority === 'medium'">remove</mat-icon>
+                    <mat-icon *ngIf="i.priority === 'low'">arrow_downward</mat-icon>
+                    {{ i.priority }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center btn-task">
+      <a mat-raised-button routerLink="new">Add Task</a>
+    </div>
+  </div>
+</div>
+

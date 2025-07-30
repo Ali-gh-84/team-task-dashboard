@@ -1,0 +1,68 @@
+.all-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+  border: 1px solid #353535;
+  width: 100%;
+  background-color: #d1d1d1;
+}
+
+.text {
+  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+  border-radius: 10px;
+  width: 100%;
+  height: 50px;
+}
+
+::ng-deep .mdc-text-field--outlined .mdc-notched-outline{
+  height: 50px;
+}
+
+::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+.cardAnimation {
+  max-height: 150px;
+  /*overflow: hidden;*/
+  transition: max-height 0.9s ease, opacity 5s ease-in-out;
+  opacity: 1;
+}
+
+.cardAnimation.open {
+  max-height: 850px;
+  opacity: 1;
+}
+
+.priority-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.high-priority mat-icon {
+  color: #d32f2f;
+}
+
+.medium-priority mat-icon {
+  color: #fbc02d;
+  font-size: 28px !important;
+}
+
+.low-priority mat-icon {
+  color: #388e3c;
+}
+
+.btn-task {
+  padding-top: 70px;
+}
+

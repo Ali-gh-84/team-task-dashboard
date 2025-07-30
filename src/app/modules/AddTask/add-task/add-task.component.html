@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <h3 class="d-flex align-content-center justify-content-center pt-5 pb-3">
+      Add Task ...
+    </h3>
+    <app-form-builder-new
+      saveButtonName="Add Task"
+      [items]='formItem'
+      buttonWidth='100%'
+      [patchValue]='data'
+      [fixedButton]="false"
+      [callerStatus]='callerStatus'
+      (formResult)='addTask($event)'>
+    </app-form-builder-new>
+  </div>
+</div>

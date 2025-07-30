@@ -1,0 +1,97 @@
+.ck .ck-reset .ck-editor .ck-rounded-corners {
+  min-height: 80px !important;
+}
+
+.ck-editor__editable {
+  min-height: 80px !important;
+}
+
+.ck-editor__editable_inline {
+  min-height: 80px !important;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 80px !important;
+}
+
+.otp-input {
+  direction: ltr !important;
+  text-align: center;
+  font-size: 24px;
+  width: 45px;
+  height: 55px;
+  border: 1px solid #b8b6b6;
+  border-radius: 8px;
+}
+
+.otp-wrapper {
+  direction: ltr !important;
+}
+
+.inputs{
+  border: 1px solid #b8b6b6;
+  border-radius: 50px !important;
+}
+
+::ng-deep mat-mdc-text-field-wrapper mdc-text-field mdc-text-field--outlined{
+  border-radius: 20px !important;
+  border: 5px solid #000000;
+}
+
+.ltr-input input {
+  direction: ltr;
+}
+
+form .card-none mat-card.form-card mat-card-content.mat-mdc-card-content {
+  padding: 0 !important;
+}
+form .card-none mat-card.form-card {
+  border-radius: 0 !important;
+  box-shadow: unset !important;
+  background: unset !important;
+}
+
+.fixed-btn {
+  position: fixed;
+  top: 8.5rem !important;
+  left: 4rem !important;
+  z-index: 9;
+  width: fit-content !important;
+  transform: translate3d(2rem, -2rem, 9px);
+}
+
+.read-only-box {
+  min-height: 40%;
+  width: 100%;
+  min-width: max-content;
+  background: #eeeeee;
+  border-radius: 10rem;
+  padding: 0 1rem 0.5rem 1rem;
+  position: relative;
+}
+
+.read-only-box .label {
+  width: max-content;
+  transform: translateY(-50%);
+}
+
+.my-input {
+  box-shadow: none !important;
+  background-color: #faf9fd !important;
+}
+
+
+::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+::ng-deep .mat-mdc-input-element .ng-untouched .ng-pristine .ng-valid .mat-mdc-form-field-input-control .mdc-text-field__input .cdk-text-field-autofill-monitored{
+  color: white !important;
+}
