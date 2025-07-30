@@ -1,0 +1,26 @@
+<form *ngIf="form" [formGroup]="form">
+  <mat-form-field appearance='outline' class="w-100 ac-form-field">
+  <mat-label>{{ item.label }} <span *ngIf="item?.required">*</span></mat-label>
+
+
+  <mat-chip-grid #chipGrid aria-label="Enter fruits">
+    <mat-chip-row *ngFor='let option of acSelected[item?.formControlName]' color='primary' (removed)='removeAutoComplete(option, item)'>
+      {{acOptionValues(item, option)}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+  <input type='text' matInput [formControlName]='item?.formControlName' [matAutocomplete]="autoComplete" [matChipInputFor]="chipGrid" #chipInput>
+<!--         (matChipInputTokenEnd)="$event.chipInput!.clear();">-->
+  </mat-chip-grid>
+
+
+<!--  <div class="spinner" matSuffix *ngIf='!acStatus[item?.formControlName] && item.type === "autoComplete"'></div>-->
+  <div class="spinner" matSuffix *ngIf='!acStatus[item?.formControlName]?.closed && item.type === "autoComplete"'></div>
+  <mat-autocomplete #autoComplete='matAutocomplete' (optionSelected)='addAutoCompleteEmit($event);'>
+    <mat-option *ngFor='let option of acOptions[item?.formControlName]' [value]='option'>
+      {{acOptionValues(item, option)}}
+    </mat-option>
+  </mat-autocomplete>
+  </mat-form-field>
+</form>
