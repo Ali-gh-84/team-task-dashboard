@@ -79,6 +79,15 @@
                             class="fw-bold text-danger">{{ item?.hint }}
                   </mat-hint>
                 </mat-form-field>
+
+                <!--toggle-->
+                <mat-slide-toggle
+                  *ngIf="item.type === 'toggle'"
+                  [formControlName]="item.formControlName"
+                  [labelPosition]="'before'">
+                  {{ item.label }}
+                </mat-slide-toggle>
+
               </div>
             </div>
           </div>

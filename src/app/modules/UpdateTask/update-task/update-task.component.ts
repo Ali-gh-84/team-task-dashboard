@@ -38,7 +38,7 @@ export class UpdateTaskComponent implements OnInit {
       label: 'title',
       formControlName: 'title',
       validators: [Validators.required],
-      classList: 'col-12 col-md-6 card-none pt-3',
+      classList: 'col-12 col-md-8 card-none pt-3',
     },
     {
       type: 'select',
@@ -50,7 +50,7 @@ export class UpdateTaskComponent implements OnInit {
         {name: 'Low', value: 'low'},
       ],
       validators: [Validators.required],
-      classList: 'col-12 col-md-5 card-none pt-3',
+      classList: 'col-12 col-md-3 card-none pt-3',
     },
     {
       type: 'textarea',
@@ -63,15 +63,16 @@ export class UpdateTaskComponent implements OnInit {
       formControlName: 'assigned',
     },
     {
-      type: 'select',
+      type: 'toggle',
       label: 'completed',
       formControlName: 'completed',
-      options: [
-        {name: 'completed', value: 'true'},
-        {name: 'incompleted', value: 'false'},
-      ],
-      validators: [Validators.required],
-      classList: 'col-12 col-md-6 card-none pt-3',
+      validators: [],
+      hint: null,
+      options: null,
+      required: false,
+      isMultiple: null,
+      dirLtr: true,
+      classList: 'col-12 col-md-6 card-none pt-3 d-flex align-items-center justify-content-around',
     },
   ];
 

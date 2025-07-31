@@ -57,6 +57,7 @@ interface FormObject {
     MatDatepickerToggle,
     MatDatepicker,
     MatNativeDateModule,
+    MatSlideToggle,
   ],
   styleUrl: 'form-builder-new.component.css',
 })
@@ -74,7 +75,6 @@ export class FormBuilderNewComponent implements OnInit, OnChanges {
   @Input() fileDownloadPath: any;
   @Output() formResult: EventEmitter<any> = new EventEmitter<any>();
   @Output() formChange: EventEmitter<any> = new EventEmitter<any>();
-
   @Input() callerStatus: any = {closed: true};
   @Input() loadingName: string = '';
   @Input() loadingLoader: "dots-loader" = 'dots-loader';
